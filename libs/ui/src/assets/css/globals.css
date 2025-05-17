@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand: 17 24 39;
+  }
+  html {
+    @apply bg-body font-body;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html.dark {
+    @apply bg-dark text-white;
+  }
+
+  html,
+  body {
+    @apply antialiased;
+  }
+
+  .dynamic-html h6 {
+    @apply font-medium uppercase;
+  }
+
+  .dynamic-html p {
+    @apply mb-3;
+  }
+}
+
+@layer utilities {
+  .text-case-inherit {
+    text-transform: inherit;
+  }
+
+  .letter-space-inherit {
+    letter-spacing: inherit;
+  }
+
+  .word-break-all {
+    word-break: break-all;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .text-vertical {
+    writing-mode: tb;
+    text-orientation: upright;
+  }
+}
+
+/* Hide spin button for input type number */
+input.spin-button-hidden::-webkit-outer-spin-button,
+input.spin-button-hidden::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
