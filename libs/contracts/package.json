@@ -1,0 +1,28 @@
+{
+  "name": "@defi-token/contracts",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "deploy:tucu": "npx hardhat ignition deploy ./ignition/modules/TucuToken.ts --network sepolia",
+    "deploy:dai": "npx hardhat ignition deploy ./ignition/modules/DaiToken18.ts --network sepolia",
+    "deploy:usdc": "npx hardhat ignition deploy ./ignition/modules/UsdcToken6.ts --network sepolia",
+    "verify:tucu": "npx hardhat verify --contract contracts/TucuToken.sol:TucuToken --network sepolia 0xbD2a993576A82F68B63B2deb67F34E5C62edEa6a",
+    "verify:dai": "npx hardhat verify --contract contracts/DaiToken18.sol:DaiToken18 --network sepolia 0x41ff97880e6D938a860F8a28B35D84b9a9D421D0",
+    "verify:usdc": "npx hardhat verify --contract contracts/UsdcToken6.sol:UsdcToken6 --network sepolia 0xa9b7d1c2Dd17Aa804a2C4D8c4d6871f547d5B9B4"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.3.0",
+    "dotenv": "^16.5.0",
+    "hardhat": "^2.24.0"
+  }
+}

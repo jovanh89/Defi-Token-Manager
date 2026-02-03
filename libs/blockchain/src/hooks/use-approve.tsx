@@ -15,19 +15,21 @@ export function useApprove() {
   const { address } = useWallet();
   const { addToast, dismissToast } = useToastStore();
   const { writeContractAsync, reset } = useWriteContract();
-  const { daiBalance, usdcBalance, daiAllowance, usdcAllowance } = useBalance();
+  const { useGetTokenBalance, useGetTokenAllowance } = useBalance();
   const { approveStatus, setApproveStatus, resetApproveStatus } =
     useActionStore();
 
-  const refetchBalances = useCallback(async () => {
-    if (approveStatus?.token === 'DAI') {
-      await daiBalance.refetch();
-      await daiAllowance.refetch();
-    }
+  const tokenBalance = useGetTokenBalance(
+    (approveStatus?.token as TokenType) || 'DAI'
+  );
+  const tokenAllowance = useGetTokenAllowance(
+    (approveStatus?.token as TokenType) || 'DAI'
+  );
 
-    if (approveStatus?.token === 'USDC') {
-      await usdcBalance.refetch();
-      await usdcAllowance.refetch();
+  const refetchBalances = useCallback(async () => {
+    if (tokenBalance) {
+      await tokenBalance.refetch();
+      await tokenAllowance.refetch();
     }
 
     addToast({
@@ -59,10 +61,8 @@ export function useApprove() {
     approveStatus?.amount,
     approveStatus?.targetAddress,
     approveStatus?.tx,
-    daiBalance,
-    usdcBalance,
-    daiAllowance,
-    usdcAllowance,
+    tokenBalance,
+    tokenAllowance,
     addToast,
     resetApproveStatus,
     reset,

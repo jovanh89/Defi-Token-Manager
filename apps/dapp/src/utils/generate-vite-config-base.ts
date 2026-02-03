@@ -21,6 +21,7 @@ export function generateViteConfigBase(
     server: {
       port,
       host: 'localhost',
+      open: `http://localhost:${port}`,
     },
 
     preview: {

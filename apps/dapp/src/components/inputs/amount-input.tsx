@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { ActionType, TokenType, useBalance } from '@defi-token/blockchain';
-import { Dai, Input, Usdc } from '@defi-token/ui';
-import { validDaiDecimals, validUsdcDecimals } from '../../utils/constants';
+import { Dai, Input, Tucu, Usdc, useTheme } from '@defi-token/ui';
+import {
+  validDaiDecimals,
+  validTucuDecimals,
+  validUsdcDecimals,
+} from '../../utils/constants';
 
 interface AmountInputProps {
   amount: string;
@@ -20,9 +24,36 @@ const AmountInput: React.FC<AmountInputProps> = ({
   setAmount,
   setIsValidAmount,
 }) => {
+  const { mode } = useTheme();
   const { getBalance } = useBalance();
   const allowance = Number(getBalance(selectedToken).allowance) || 0;
   const balance = Number(getBalance(selectedToken).data) || 0;
+
+  const handleToken = () => {
+    if (selectedToken === 'DAI')
+      return {
+        image: <Dai />,
+        step: '.000000000000000001',
+        pattern: validDaiDecimals.source,
+      };
+    if (selectedToken === 'USDC')
+      return {
+        image: <Usdc />,
+        step: '.000001',
+        pattern: validUsdcDecimals.source,
+      };
+    if (selectedToken === 'TUCU')
+      return {
+        image: <Tucu color={mode === 'dark' ? 'white' : 'black'} />,
+        step: '.000000000000000001',
+        pattern: validTucuDecimals.source,
+      };
+    return {
+      image: <Dai />,
+      step: '.000000000000000001',
+      pattern: validDaiDecimals.source,
+    };
+  };
 
   const handleAmountValidation = () => {
     if (!amount) return 'Amount is required';
@@ -34,6 +65,8 @@ const AmountInput: React.FC<AmountInputProps> = ({
       return 'Insufficient allowance, need to approve token first';
     if (selectedToken === 'DAI' && !amount.match(validDaiDecimals))
       return 'Invalid amount, for DAI use up to 18 decimals';
+    if (selectedToken === 'TUCU' && !amount.match(validTucuDecimals))
+      return 'Invalid amount, for TUCU use up to 18 decimals';
     if (selectedToken === 'USDC' && !amount.match(validUsdcDecimals))
       return 'Invalid amount, for USDC use up to 6 decimals';
     return '';
@@ -56,14 +89,10 @@ const AmountInput: React.FC<AmountInputProps> = ({
       onChange={(e) => setAmount(e.target.value)}
       type="number"
       min="0"
-      icon={selectedToken === 'DAI' ? <Dai /> : <Usdc />}
+      icon={handleToken().image}
       placeholder={'0.00'}
-      step={selectedToken === 'DAI' ? '.000000000000000001' : '.000001'}
-      pattern={
-        selectedToken === 'DAI'
-          ? validDaiDecimals.source
-          : validUsdcDecimals.source
-      }
+      step={handleToken().step}
+      pattern={handleToken().pattern}
       error={handleAmountValidation()}
       onBlur={() => {
         if (amount === '0') setAmount('');

@@ -2,13 +2,20 @@ import React from 'react';
 import { handleContract, useBalance } from '@defi-token/blockchain';
 import Card from './card';
 import TokenCard, { TokenCardProps } from './token-card';
-import { Dai, Usdc } from '@defi-token/ui';
+import { Dai, Tucu, Usdc, useTheme } from '@defi-token/ui';
 
 const BalanceCard: React.FC = () => {
   const { getBalance } = useBalance();
+  const { mode } = useTheme();
 
-  const isLoading = getBalance('DAI').isLoading || getBalance('USDC').isLoading;
-  const isError = getBalance('DAI').isError || getBalance('USDC').isError;
+  const isLoading =
+    getBalance('DAI').isLoading ||
+    getBalance('USDC').isLoading ||
+    getBalance('TUCU').isLoading;
+  const isError =
+    getBalance('DAI').isError ||
+    getBalance('USDC').isError ||
+    getBalance('TUCU').isError;
 
   const tokens: TokenCardProps[] = [
     {
@@ -33,7 +40,19 @@ const BalanceCard: React.FC = () => {
       isError: getBalance('USDC').isError,
       isBorder: true,
     },
+    {
+      name: 'TUCU',
+      symbol: 'TUCU',
+      icon: <Tucu color={mode === 'dark' ? 'white' : 'black'} />,
+      balance: getBalance('TUCU').data,
+      allowance: getBalance('TUCU').allowance,
+      isLoading: getBalance('TUCU').isLoading || getBalance('TUCU').isFetching,
+      contractAddress: handleContract('TUCU').address,
+      isError: getBalance('TUCU').isError,
+      isBorder: true,
+    },
   ];
+
   return (
     <Card title="Balances" isLoading={isLoading && !isError}>
       <div className="grid gap-4 sm:grid-cols-2">

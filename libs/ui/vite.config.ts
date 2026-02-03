@@ -18,6 +18,13 @@ export default defineConfig({
       tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
     }),
   ],
+  resolve: {
+    alias: {
+      'libs/ui/src': path.resolve(__dirname, '../ui/src'),
+      'libs/blockchain/src': path.resolve(__dirname, '../blockchain/src'),
+      'libs/contracts/src': path.resolve(__dirname, '../contracts/src'),
+    },
+  },
   // build: {
   //   outDir: '../../dist/libs/ui',
   //   emptyOutDir: true,

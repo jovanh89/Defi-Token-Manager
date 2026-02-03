@@ -1,0 +1,42 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Analysis and Smart Contract Usage
+
+## General Structure
+- The repository is an Nx monorepo with the following main directories:
+  - `apps/dapp/`: Main DApp built with React + Vite.
+  - `libs/blockchain/`: Library for blockchain and smart contract interaction.
+  - `libs/ui/`: Reusable UI components.
+  - `libs/`: Other shared utilities or modules.
+
+## Smart Contracts Used
+- **USDC and DAI ERC20 contracts** are used via their ABIs in [usdc-abi.ts](mdc:libs/blockchain/src/utils/usdc-abi.ts) and [dai-abi.ts](mdc:libs/blockchain/src/utils/dai-abi.ts).
+- These are standard ERC20 contracts, with no custom contracts or modifications detected.
+- Contract addresses are configured via environment variables.
+
+## DApp Functionality
+- **Frontend**: Built with React, Vite, Tailwind, Zustand, Wagmi, RainbowKit.
+- **Blockchain Interaction**: Handled in `libs/blockchain/` using wagmi and viem.
+- **Wallet Connection**: Via RainbowKit and MetaMask.
+- **State Management**: Zustand.
+- **UI**: Modular, reusable components in `libs/ui/`.
+- **Testing**: Jest, Testing Library, Vitest.
+
+## Security and Best Practices
+- No malicious patterns detected (e.g., eval, Function, unknown fetch).
+- Proper use of environment variables for sensitive data.
+- No private keys or sensitive data stored in frontend code.
+- Uses trusted libraries and standard contracts.
+
+## Summary
+- The DApp allows wallet connection, balance queries, and standard ERC20 operations on USDC and DAI (Sepolia testnet).
+- All blockchain logic is abstracted in `libs/blockchain`.
+- The codebase is modular, secure, and ready for extension with custom smart contracts.
+
+---
+
+**Next Steps:**  
+Ready to build custom smart contracts. Specify your idea or request a starter contract example.

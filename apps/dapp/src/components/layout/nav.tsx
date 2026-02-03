@@ -2,18 +2,16 @@
 import 'libs/ui/src/assets/css/scrollbar.css';
 import 'libs/ui/src/assets/css/globals.css';
 import 'libs/ui/src/assets/css/fonts.css';
-import { Moon, Settings, Sun, Button, useToastStore } from '@defi-token/ui';
+import { useToastStore } from '@defi-token/ui';
 import {
   ConnectButton,
   useProviderStore,
   useWallet,
 } from '@defi-token/blockchain';
-import useLayoutTheme from '../../hooks/use-layout-theme';
 import { appName } from '../../utils/constants';
 import { useEffect } from 'react';
 
 export function Nav() {
-  const { isDark, setMode, handleRandomColor } = useLayoutTheme();
   const { addToast } = useToastStore();
   const { isConnected } = useWallet();
   const { provider } = useProviderStore();
@@ -40,25 +38,6 @@ export function Nav() {
       </div>
       <div className="flex items-center sm:space-x-2">
         <ConnectButton label="Connect Wallet" provider={provider} />
-        <Button
-          data-testid="theme-color-button"
-          className={'animate-pulse hidden sm:flex'}
-          color="primary"
-          shape="circle"
-          variant="ghost"
-          onClick={() => handleRandomColor()}
-        >
-          <Settings />
-        </Button>
-        <Button
-          data-testid="theme-button"
-          className={'hidden sm:flex'}
-          color={'primary'}
-          shape="circle"
-          onClick={() => setMode(isDark ? 'light' : 'dark')}
-        >
-          {isDark ? <Moon /> : <Sun />}
-        </Button>
       </div>
     </nav>
   );

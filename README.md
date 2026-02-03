@@ -9,6 +9,22 @@ This is a simple challenge app that allows you to manage your DeFi tokens.
 Create a basic repo in React where you are going to code a couple of exercises with basic logic in a clean and simple manner.
 The idea is to use redux state management or useContext and viem/wagmi library to communicate with the blockchain.
 
+## Install & run (PowerShell)
+
+1. Install dependencies
+
+```powershell
+npm install
+```
+
+2. Start the development server
+
+```powershell
+npm run dev
+```
+
+Open http://localhost:3000 in your browser. The app will hot-reload on changes.
+
 ## **Keypoints:**
 
 - Understand how the blockchain and contracts work.

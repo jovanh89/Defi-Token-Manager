@@ -1,4 +1,8 @@
-import { DAI_DECIMALS, USDC_DECIMALS } from '@defi-token/blockchain';
+import {
+  DAI_DECIMALS,
+  TUCU_DECIMALS,
+  USDC_DECIMALS,
+} from '@defi-token/blockchain';
 
 export const appName = import.meta.env.VITE_APP_NAME;
 export const environment = import.meta.env.VITE_APP_ENVIRONMENT;
@@ -8,4 +12,7 @@ export const validDaiDecimals = new RegExp(
 );
 export const validUsdcDecimals = new RegExp(
   `^[0-9]*[.,]?[0-9]{0,${USDC_DECIMALS}}$`
+);
+export const validTucuDecimals = new RegExp(
+  `^[0-9]*[.,]?[0-9]{0,${TUCU_DECIMALS}}$`
 );

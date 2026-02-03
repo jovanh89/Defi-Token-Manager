@@ -17,6 +17,7 @@
     "paths": {
       "@defi-token-app/*": ["apps/dapp/src/*"],
       "@defi-token/blockchain": ["libs/blockchain/src/index.ts"],
+      "@defi-token/contracts": ["libs/contracts/src/index.ts"],
       "@defi-token/ui": ["libs/ui/src/index.ts"]
     }
   },

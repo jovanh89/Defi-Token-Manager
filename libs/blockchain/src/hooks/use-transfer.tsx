@@ -15,19 +15,21 @@ export function useTransfer() {
   const { address } = useWallet();
   const { addToast, dismissToast } = useToastStore();
   const { writeContractAsync, reset } = useWriteContract();
-  const { daiBalance, usdcBalance, daiAllowance, usdcAllowance } = useBalance();
+  const { useGetTokenBalance, useGetTokenAllowance } = useBalance();
   const { transferStatus, setTransferStatus, resetTransferStatus } =
     useActionStore();
 
-  const refetchBalances = useCallback(async () => {
-    if (transferStatus?.token === 'DAI') {
-      await daiBalance.refetch();
-      await daiAllowance.refetch();
-    }
+  const tokenBalance = useGetTokenBalance(
+    (transferStatus?.token as TokenType) || 'DAI'
+  );
+  const tokenAllowance = useGetTokenAllowance(
+    (transferStatus?.token as TokenType) || 'DAI'
+  );
 
-    if (transferStatus?.token === 'USDC') {
-      await usdcBalance.refetch();
-      await usdcAllowance.refetch();
+  const refetchBalances = useCallback(async () => {
+    if (tokenBalance) {
+      await tokenBalance.refetch();
+      await tokenAllowance.refetch();
     }
 
     addToast({
@@ -59,10 +61,8 @@ export function useTransfer() {
     transferStatus?.amount,
     transferStatus?.targetAddress,
     transferStatus?.tx,
-    daiBalance,
-    usdcBalance,
-    daiAllowance,
-    usdcAllowance,
+    tokenBalance,
+    tokenAllowance,
     addToast,
     resetTransferStatus,
     reset,

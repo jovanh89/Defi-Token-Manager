@@ -21,10 +21,8 @@ export default defineConfig({
   resolve: {
     alias: {
       'libs/ui/src': path.resolve(__dirname, '../ui/src'),
-      'libs/shell/src': path.resolve(__dirname, '../shell/src'),
-      'libs/integrations/src': path.resolve(__dirname, '../integrations/src'),
-      'libs/datatable/src': path.resolve(__dirname, '../datatable/src'),
-      'libs/features/src': path.resolve(__dirname, '../features/src'),
+      'libs/blockchain/src': path.resolve(__dirname, '../blockchain/src'),
+      'libs/contracts/src': path.resolve(__dirname, '../contracts/src'),
     },
   },
   // build: {

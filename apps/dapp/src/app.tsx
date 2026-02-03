@@ -7,7 +7,6 @@ import SignInPage from './pages/sign-in';
 
 export function App() {
   const queryClient = new QueryClient();
-
   return (
     <Provider configProvider="rainbow" queryClient={queryClient}>
       <Routes>

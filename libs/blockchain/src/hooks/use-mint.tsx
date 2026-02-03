@@ -15,18 +15,20 @@ export function useMint() {
   const { address } = useWallet();
   const { addToast, dismissToast } = useToastStore();
   const { writeContractAsync, reset } = useWriteContract();
-  const { daiBalance, usdcBalance, daiAllowance, usdcAllowance } = useBalance();
+  const { useGetTokenBalance, useGetTokenAllowance } = useBalance();
   const { mintStatus, setMintStatus, resetMintStatus } = useActionStore();
 
-  const refetchBalances = useCallback(async () => {
-    if (mintStatus?.token === 'DAI') {
-      await daiBalance.refetch();
-      await daiAllowance.refetch();
-    }
+  const tokenBalance = useGetTokenBalance(
+    (mintStatus?.token as TokenType) || 'DAI'
+  );
+  const tokenAllowance = useGetTokenAllowance(
+    (mintStatus?.token as TokenType) || 'DAI'
+  );
 
-    if (mintStatus?.token === 'USDC') {
-      await usdcBalance.refetch();
-      await usdcAllowance.refetch();
+  const refetchBalances = useCallback(async () => {
+    if (tokenBalance) {
+      await tokenBalance.refetch();
+      await tokenAllowance.refetch();
     }
 
     addToast({
@@ -54,10 +56,8 @@ export function useMint() {
     reset();
   }, [
     addToast,
-    daiBalance,
-    usdcBalance,
-    daiAllowance,
-    usdcAllowance,
+    tokenBalance,
+    tokenAllowance,
     mintStatus?.amount,
     mintStatus?.token,
     mintStatus?.tx,

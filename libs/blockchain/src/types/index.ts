@@ -1,4 +1,4 @@
-export type TokenType = 'DAI' | 'USDC';
+export type TokenType = 'DAI' | 'USDC' | 'TUCU';
 
 export type ActionType = 'APPROVE' | 'TRANSFER' | 'MINT';
 

@@ -3,11 +3,12 @@ import {
   CHAIN_ID,
   DAI_CONTRACT_ADDRESS,
   DAI_DECIMALS,
+  TUCU_CONTRACT_ADDRESS,
+  TUCU_DECIMALS,
   USDC_CONTRACT_ADDRESS,
   USDC_DECIMALS,
 } from './constants';
-import { DAI_ABI } from './dai-abi';
-import { USDC_ABI } from './usdc-abi';
+import { DAI_ABI, USDC_ABI, TUCU_ABI } from '@defi-token/contracts';
 
 export const handleContract = (token: TokenType) => {
   switch (token) {
@@ -23,6 +24,13 @@ export const handleContract = (token: TokenType) => {
         address: USDC_CONTRACT_ADDRESS,
         abi: USDC_ABI,
         decimals: USDC_DECIMALS,
+        chainId: CHAIN_ID,
+      };
+    case 'TUCU':
+      return {
+        address: TUCU_CONTRACT_ADDRESS,
+        abi: TUCU_ABI,
+        decimals: TUCU_DECIMALS,
         chainId: CHAIN_ID,
       };
     default:

@@ -59,8 +59,8 @@ const TokenCard: React.FC<TokenCardProps> = ({
           </div>
 
           <div className=" text-sm font-medium tracking-tighter text-gray-900 dark:text-white lg:text-lg 2xl:text-xl 3xl:text-2xl">
-            {Number(balance) || 'Error balance'}
-            <span className="ml-2">{Number(balance) ? symbol : ''}</span>
+            {Number(balance) >= 0 ? Number(balance) : 'Error balance'}
+            <span className="ml-2">{Number(balance) >= 0 ? symbol : ''}</span>
           </div>
 
           {allowance && (
@@ -70,8 +70,9 @@ const TokenCard: React.FC<TokenCardProps> = ({
                 Number(allowance) > 0 ? 'text-green-500' : 'text-red-500'
               )}
             >
-              Allowance: {Number(allowance) || 'Error allowance'}{' '}
-              {Number(allowance) ? symbol : ''}
+              Allowance:{' '}
+              {Number(allowance) >= 0 ? Number(allowance) : 'Error allowance'}{' '}
+              {Number(allowance) >= 0 ? symbol : ''}
             </div>
           )}
 
