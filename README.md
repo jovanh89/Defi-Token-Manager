@@ -2,12 +2,10 @@
 
 ## What is this?
 
-This is a simple challenge app that allows you to manage your DeFi tokens.
+Defi Token Manager aims to become a modular, multi-chain DeFi asset management platform that allows individuals and teams to securely manage, monitor, and operate on-chain tokens and DeFi positions through a unified interface.
 
-## Challenge
-
-Create a basic repo in React where you are going to code a couple of exercises with basic logic in a clean and simple manner.
-The idea is to use redux state management or useContext and viem/wagmi library to communicate with the blockchain.
+In simple words:
+The goal is to build a professional-grade DeFi control center — not just for sending tokens, but for managing assets, permissions, risks, and DeFi activity across multiple blockchains.
 
 ## Install & run (PowerShell)
 
